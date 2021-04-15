@@ -37,8 +37,7 @@ const InventoryHooks = ({defaultModel}) => {
     )
 }
 
-const Container = (props) => {
-    const container = props.container
+const Container = ({container, ...props}) => {
     const [name, setName] = useState(container.name)
     const [editing, setEditing] = useState(container.editing)
     const [contents, setContents] = useState(container.contents)
@@ -87,8 +86,7 @@ const Container = (props) => {
     )
 }
 
-const Item = (props) => {
-    const item = props.item
+const Item = ({item, ...props}) => {
     const [name, setName] = useState(item.name)
     const [weight, setWeight] = useState(item.weight)
     const [editing, setEditing] = useState(item.editing)
