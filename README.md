@@ -3,6 +3,12 @@ A minimalist, front-end only CRUD single page application made with React
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+The features to demonstrate in this demo are just the 4 basic CRUD operations (Create, Read, Update, Delete), using
+nested components. Two implementations are shown together, one using Hooks (InventoryHooks.js), and one using a single
+class (InventoryMvp.js). Only a _uuid_ library is used beyond basic React.
+
+<img src="inventory_screenshot.png" />
+
 ## First Install
 
 Navigate to the project folder and run
