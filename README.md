@@ -11,6 +11,13 @@ npm install
 ```
 To install every package described in package.json
 
+If you are on Windows and you get an error like
+```
+'npm' is not recognized as an internal or external command,
+operable program or batch file.
+```
+Then first you need to [install Node.js](https://nodejs.org/en/download/)
+
 ## Starting the App
 
 ```

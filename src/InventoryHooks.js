@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 
 // Function components and hooks to achieve a more streamlined inventory compared to InventoryMvp
 
@@ -14,6 +14,7 @@ const InventoryHooks = (model) => {
 const Container = (container) => {
     const [name, setName] = useState(container.name)
     const [editing, setEditing] = useState(container.editing)
+    const [contents, setContents] = useState(container.contents)
 
     return (
         <table key={container.id}>
@@ -31,18 +32,21 @@ const Container = (container) => {
             </tr>
             </thead>
             <tbody>
-                {container.contents.map((item) => Item(item.id, item.name, item.weight, item.editing))}
+                {contents.map((item) => Item(item))}
             </tbody>
         </table>
     )
 }
 
-const Item = (id, name_, weight_, editing_) => {
-    const [name, setName] = useState(name_)
-    const [weight, setWeight] = useState(weight_)
-    const [editing, setEditing] = useState(editing_)
+const Item = (item) => {
+    const id = item.id
+    const [name, setName] = useState(item.name)
+    const [weight, setWeight] = useState(item.weight)
+    const [editing, setEditing] = useState(item.editing)
+    const [deleted, setDeleted] = useState(false)
 
     return (
+        !deleted &&
         <tr key={id}>
             <td>
                 {editing ? (
@@ -56,6 +60,7 @@ const Item = (id, name_, weight_, editing_) => {
             </td>
             <td>
                 <button onClick={() => setEditing(!editing)}>{editing ? "Save" : "Edit"}</button>
+                <button onClick={() => setDeleted(true)}>Deleted</button>
             </td>
         </tr>
     )
