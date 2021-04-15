@@ -1,23 +1,58 @@
-import React, {useState, useEffect} from "react";
+import uuid from 'react-uuid'
+import React, {useState} from "react";
 
 // Function components and hooks to achieve a more streamlined inventory compared to InventoryMvp
 
-const InventoryHooks = (model) => {
+const InventoryHooks = ({defaultModel}) => {
+    const [model, setModel] = useState(defaultModel)
+
+    const addContainer = () => {
+        const newContainer = {
+            id: uuid(),
+            name: "New Container",
+            contents: [],
+            editing: false
+        }
+        setModel([...model, newContainer])
+    }
+
+    const removeContainer = (id) => {
+        setModel(model.filter(container => container.id !== id))
+    }
+
     return (
         <div>
             <h1>Inventory based on Hooks</h1>
-            {model.map((container) => Container(container))}
+            {model.map((container) => <Container container={container} key={container.id} remove={removeContainer}/>)}
+            <button onClick={addContainer}>+ New Container</button>
         </div>
     )
 }
 
-const Container = (container) => {
+const Container = (props) => {
+    const container = props.container
     const [name, setName] = useState(container.name)
     const [editing, setEditing] = useState(container.editing)
     const [contents, setContents] = useState(container.contents)
 
+    const selfDelete = () => props.remove(container.id)
+
+    const addItem = () => {
+        const newItem = {
+            id: uuid(),
+            name: "new item",
+            weight: 0,
+            editing: false
+        }
+        setContents([...contents, newItem])
+    }
+
+    const removeItem = (id) => {
+        setContents(contents.filter(item => item.id !== id))
+    }
+
     return (
-        <table key={container.id}>
+        <table>
             <thead>
             <tr>
                 <th>
@@ -25,29 +60,35 @@ const Container = (container) => {
                         <input type="text" value={name} onChange={(e) => setName(e.target.value)}/>
                     ) : name}
                 </th>
-                <th>Weight</th>
+                <th>Weight (kg)</th>
                 <th>
                     <button onClick={() => setEditing(!editing)}>{editing ? "Save" : "Edit"}</button>
+                    <button onClick={selfDelete}>Delete</button>
                 </th>
             </tr>
             </thead>
             <tbody>
-                {contents.map((item) => Item(item))}
+            {contents.map((item) => <Item item={item} key={item.id} remove={removeItem}/>)}
+            <tr>
+                <td>
+                    <button onClick={addItem}>+ New Item</button>
+                </td>
+            </tr>
             </tbody>
         </table>
     )
 }
 
-const Item = (item) => {
-    const id = item.id
+const Item = (props) => {
+    const item = props.item
     const [name, setName] = useState(item.name)
     const [weight, setWeight] = useState(item.weight)
     const [editing, setEditing] = useState(item.editing)
-    const [deleted, setDeleted] = useState(false)
+
+    const selfDelete = () => props.remove(item.id)
 
     return (
-        !deleted &&
-        <tr key={id}>
+        <tr>
             <td>
                 {editing ? (
                     <input type="text" value={name} onChange={(e) => setName(e.target.value)}/>
@@ -60,7 +101,7 @@ const Item = (item) => {
             </td>
             <td>
                 <button onClick={() => setEditing(!editing)}>{editing ? "Save" : "Edit"}</button>
-                <button onClick={() => setDeleted(true)}>Deleted</button>
+                <button onClick={selfDelete}>Delete</button>
             </td>
         </tr>
     )

@@ -52,12 +52,12 @@ const model = [
     ]
 
 function App() {
-  return (
-      <div>
-          {InventoryHooks(model)}
-          <InventoryMvp model={model}/>
-      </div>
-  );
+    return (
+        <div>
+            <InventoryHooks defaultModel={model}/>
+            <InventoryMvp model={model}/>
+        </div>
+    );
 }
 
 export default App;
