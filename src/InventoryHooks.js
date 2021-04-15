@@ -21,10 +21,18 @@ const InventoryHooks = ({defaultModel}) => {
     }
 
     return (
-        <div>
+        <div className="content-block">
             <h1>Inventory based on Hooks</h1>
             {model.map((container) => <Container container={container} key={container.id} remove={removeContainer}/>)}
-            <button onClick={addContainer}>+ New Container</button>
+            <table>
+                <tbody>
+                <tr>
+                    <td>
+                        <button className="btn btn-large" onClick={addContainer}>+ New Container</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     )
 }
@@ -62,8 +70,8 @@ const Container = (props) => {
                 </th>
                 <th>Weight (kg)</th>
                 <th>
-                    <button onClick={() => setEditing(!editing)}>{editing ? "Save" : "Edit"}</button>
-                    <button onClick={selfDelete}>Delete</button>
+                    <button className="btn btn-main" onClick={() => setEditing(!editing)}>{editing ? "Save" : "Edit"}</button>
+                    <button className="btn btn-delete" onClick={selfDelete}>Delete</button>
                 </th>
             </tr>
             </thead>
@@ -71,7 +79,7 @@ const Container = (props) => {
             {contents.map((item) => <Item item={item} key={item.id} remove={removeItem}/>)}
             <tr>
                 <td>
-                    <button onClick={addItem}>+ New Item</button>
+                    <button className="btn btn-large" onClick={addItem}>+ New Item</button>
                 </td>
             </tr>
             </tbody>
@@ -100,8 +108,8 @@ const Item = (props) => {
                 ) : weight}
             </td>
             <td>
-                <button onClick={() => setEditing(!editing)}>{editing ? "Save" : "Edit"}</button>
-                <button onClick={selfDelete}>Delete</button>
+                <button className="btn btn-main" onClick={() => setEditing(!editing)}>{editing ? "Save" : "Edit"}</button>
+                <button className="btn btn-delete" onClick={selfDelete}>Delete</button>
             </td>
         </tr>
     )

@@ -71,7 +71,7 @@ class InventoryMvp extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="content-block">
                 <h1>Minimally viable inventory, using a class</h1>
                 {this.state.model.map(container => (
                     <table key={"full_table" + container.id}>
@@ -82,8 +82,8 @@ class InventoryMvp extends React.Component {
                                 <th><input type="text" value={container.name} onChange={(event) => this.updateContainer(container.id, "name", event)}/></th>
                                 <th>Weight (kg)</th>
                                 <th>
-                                    <button onClick={() => this.updateContainer(container.id, "editing")}>Save</button>
-                                    <button onClick={() => this.deleteContainer(container.id)}>Delete</button>
+                                    <button className="btn btn-main" onClick={() => this.updateContainer(container.id, "editing")}>Save</button>
+                                    <button className="btn btn-delete" onClick={() => this.deleteContainer(container.id)}>Delete</button>
                                 </th>
                             </tr>
                             :
@@ -91,8 +91,8 @@ class InventoryMvp extends React.Component {
                                 <th>{container.name}</th>
                                 <th>Weight (kg)</th>
                                 <th>
-                                    <button onClick={() => this.updateContainer(container.id, "editing")}>Edit</button>
-                                    <button onClick={() => this.deleteContainer(container.id)}>Delete</button>
+                                    <button className="btn btn-main" onClick={() => this.updateContainer(container.id, "editing")}>Edit</button>
+                                    <button className="btn btn-delete" onClick={() => this.deleteContainer(container.id)}>Delete</button>
                                 </th>
                             </tr>
                         }
@@ -109,8 +109,8 @@ class InventoryMvp extends React.Component {
                                         <input type="number" value={item.weight} onChange={(event) => this.updateItem(container.id, item.id, "weight", event)}/>
                                     </td>
                                     <td>
-                                        <button onClick={() => this.updateItem(container.id, item.id, "editing")}>Save</button>
-                                        <button onClick={() => this.deleteItem(container.id, item.id)}>Delete</button>
+                                        <button className="btn btn-main" onClick={() => this.updateItem(container.id, item.id, "editing")}>Save</button>
+                                        <button className="btn btn-delete" onClick={() => this.deleteItem(container.id, item.id)}>Delete</button>
                                     </td>
                                 </tr>
                                 :
@@ -122,20 +122,28 @@ class InventoryMvp extends React.Component {
                                         {item.weight}
                                     </td>
                                     <td>
-                                        <button onClick={() => this.updateItem(container.id, item.id, "editing")}>Edit</button>
-                                        <button onClick={() => this.deleteItem(container.id, item.id)}>Delete</button>
+                                        <button className="btn btn-main" onClick={() => this.updateItem(container.id, item.id, "editing")}>Edit</button>
+                                        <button className="btn btn-delete" onClick={() => this.deleteItem(container.id, item.id)}>Delete</button>
                                     </td>
                                 </tr>
                         ))}
                         <tr>
                             <td>
-                                <button onClick={() => this.addItem(container.id)}>+ New Item</button>
+                                <button className="btn btn-large" onClick={() => this.addItem(container.id)}>+ New Item</button>
                             </td>
                         </tr>
                         </tbody>
                     </table>
                 ))}
-                <button onClick={() => this.addContainer()}>+ New Container</button>
+                <table>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <button className="btn btn-large" onClick={() => this.addContainer()}>+ New Container</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         )
     }
