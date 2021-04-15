@@ -64,9 +64,9 @@ const Container = (props) => {
             <thead>
             <tr>
                 <th>
-                    {editing ? (
+                    {editing ?
                         <input type="text" value={name} onChange={(e) => setName(e.target.value)}/>
-                    ) : name}
+                        : name}
                 </th>
                 <th>Weight (kg)</th>
                 <th>
@@ -98,14 +98,14 @@ const Item = (props) => {
     return (
         <tr>
             <td>
-                {editing ? (
+                {editing ?
                     <input type="text" value={name} onChange={(e) => setName(e.target.value)}/>
-                ) : name}
+                    : name}
             </td>
             <td>
-                {editing ? (
+                {editing ?
                     <input type="number" value={weight} onChange={(e) => setWeight(e.target.value)}/>
-                ) : weight}
+                    : weight}
             </td>
             <td>
                 <button className="btn btn-main" onClick={() => setEditing(!editing)}>{editing ? "Save" : "Edit"}</button>

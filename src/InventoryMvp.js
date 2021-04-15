@@ -76,56 +76,37 @@ class InventoryMvp extends React.Component {
                 {this.state.model.map(container => (
                     <table key={"full_table" + container.id}>
                         <thead>
-                        {container.editing
-                            ?
-                            <tr key={container.id}>
-                                <th><input type="text" value={container.name} onChange={(event) => this.updateContainer(container.id, "name", event)}/></th>
-                                <th>Weight (kg)</th>
-                                <th>
-                                    <button className="btn btn-main" onClick={() => this.updateContainer(container.id, "editing")}>Save</button>
-                                    <button className="btn btn-delete" onClick={() => this.deleteContainer(container.id)}>Delete</button>
-                                </th>
-                            </tr>
-                            :
-                            <tr key={container.id}>
-                                <th>{container.name}</th>
-                                <th>Weight (kg)</th>
-                                <th>
-                                    <button className="btn btn-main" onClick={() => this.updateContainer(container.id, "editing")}>Edit</button>
-                                    <button className="btn btn-delete" onClick={() => this.deleteContainer(container.id)}>Delete</button>
-                                </th>
-                            </tr>
-                        }
+                        <tr key={container.id}>
+                            <th>
+                                {container.editing ?
+                                    <input type="text" value={container.name} onChange={(event) => this.updateContainer(container.id, "name", event)}/>
+                                    : container.name}
+                            </th>
+                            <th>Weight (kg)</th>
+                            <th>
+                                <button className="btn btn-main" onClick={() => this.updateContainer(container.id, "editing")}>{container.editing ? "Save" : "Edit"}</button>
+                                <button className="btn btn-delete" onClick={() => this.deleteContainer(container.id)}>Delete</button>
+                            </th>
+                        </tr>
                         </thead>
                         <tbody>
                         {container.contents.map(item => (
-                            item.editing
-                                ?
-                                <tr key={item.id}>
-                                    <td>
+                            <tr key={item.id}>
+                                <td>
+                                    {item.editing ?
                                         <input type="text" value={item.name} onChange={(event) => this.updateItem(container.id, item.id, "name", event)}/>
-                                    </td>
-                                    <td>
+                                        : item.name}
+                                </td>
+                                <td>
+                                    {item.editing ?
                                         <input type="number" value={item.weight} onChange={(event) => this.updateItem(container.id, item.id, "weight", event)}/>
-                                    </td>
-                                    <td>
-                                        <button className="btn btn-main" onClick={() => this.updateItem(container.id, item.id, "editing")}>Save</button>
-                                        <button className="btn btn-delete" onClick={() => this.deleteItem(container.id, item.id)}>Delete</button>
-                                    </td>
-                                </tr>
-                                :
-                                <tr key={item.id}>
-                                    <td>
-                                        {item.name}
-                                    </td>
-                                    <td>
-                                        {item.weight}
-                                    </td>
-                                    <td>
-                                        <button className="btn btn-main" onClick={() => this.updateItem(container.id, item.id, "editing")}>Edit</button>
-                                        <button className="btn btn-delete" onClick={() => this.deleteItem(container.id, item.id)}>Delete</button>
-                                    </td>
-                                </tr>
+                                        : item.weight}
+                                </td>
+                                <td>
+                                    <button className="btn btn-main" onClick={() => this.updateItem(container.id, item.id, "editing")}>{item.editing ? "Save" : "Edit"}</button>
+                                    <button className="btn btn-delete" onClick={() => this.deleteItem(container.id, item.id)}>Delete</button>
+                                </td>
+                            </tr>
                         ))}
                         <tr>
                             <td>
